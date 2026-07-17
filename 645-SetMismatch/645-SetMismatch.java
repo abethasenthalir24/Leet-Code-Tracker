@@ -1,0 +1,22 @@
+// Last updated: 7/17/2026, 2:56:58 PM
+class Solution {
+    public int[] findErrorNums(int[] nums) {
+        int n = nums.length;
+        int[] freq = new int[n + 1];
+        int[] ans = new int[2];
+
+        for (int num : nums) {
+            freq[num]++;
+        }
+
+        for (int i = 1; i <= n; i++) {
+            if (freq[i] == 2) {
+                ans[0] = i;
+            } else if (freq[i] == 0) {
+                ans[1] = i;
+            }
+        }
+
+        return ans;
+    }
+}
