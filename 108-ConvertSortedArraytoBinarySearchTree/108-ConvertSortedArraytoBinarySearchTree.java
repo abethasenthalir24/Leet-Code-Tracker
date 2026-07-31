@@ -1,13 +1,15 @@
-// Last updated: 7/31/2026, 9:00:24 AM
-1class Solution {
-2    public int singleNumber(int[] nums) {
+// Last updated: 7/31/2026, 9:01:08 AM
+1public class Solution {
+2    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
 3
-4        int result = 0;
-5
-6        for (int num : nums) {
-7            result ^= num;
-8        }
-9
-10        return result;
-11    }
-12}
+4        ListNode a = headA;
+5        ListNode b = headB;
+6
+7        while (a != b) {
+8            a = (a == null) ? headB : a.next;
+9            b = (b == null) ? headA : b.next;
+10        }
+11
+12        return a;
+13    }
+14}
