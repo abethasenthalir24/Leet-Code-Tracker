@@ -1,25 +1,28 @@
-// Last updated: 8/1/2026, 7:25:57 AM
+// Last updated: 8/1/2026, 7:27:29 AM
 1class Solution {
-2    public String countAndSay(int n) {
-3        String result = "1";
-4
-5        for (int i = 2; i <= n; i++) {
-6            StringBuilder sb = new StringBuilder();
-7            int count = 1;
-8
-9            for (int j = 1; j <= result.length(); j++) {
-10                if (j < result.length() && result.charAt(j) == result.charAt(j - 1)) {
-11                    count++;
-12                } else {
-13                    sb.append(count);
-14                    sb.append(result.charAt(j - 1));
-15                    count = 1;
-16                }
-17            }
-18
-19            result = sb.toString();
-20        }
-21
-22        return result;
-23    }
-24}
+2    public int[][] insert(int[][] intervals, int[] newInterval) {
+3        List<int[]> result = new ArrayList<>();
+4        int i = 0;
+5        int n = intervals.length;
+6
+7        while (i < n && intervals[i][1] < newInterval[0]) {
+8            result.add(intervals[i]);
+9            i++;
+10        }
+11
+12        while (i < n && intervals[i][0] <= newInterval[1]) {
+13            newInterval[0] = Math.min(newInterval[0], intervals[i][0]);
+14            newInterval[1] = Math.max(newInterval[1], intervals[i][1]);
+15            i++;
+16        }
+17
+18        result.add(newInterval);
+19
+20        while (i < n) {
+21            result.add(intervals[i]);
+22            i++;
+23        }
+24
+25        return result.toArray(new int[result.size()][]);
+26    }
+27}
