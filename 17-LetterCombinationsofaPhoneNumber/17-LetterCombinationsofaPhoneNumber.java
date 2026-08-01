@@ -1,30 +1,23 @@
-// Last updated: 8/1/2026, 7:40:13 AM
+// Last updated: 8/1/2026, 7:42:03 AM
 1class Solution {
-2    public List<String> letterCombinations(String digits) {
-3        List<String> result = new ArrayList<>();
-4        if (digits == null || digits.length() == 0) return result;
+2    public ListNode removeNthFromEnd(ListNode head, int n) {
+3        ListNode dummy = new ListNode(0);
+4        dummy.next = head;
 5
-6        String[] map = {
-7            "", "", "abc", "def", "ghi", "jkl",
-8            "mno", "pqrs", "tuv", "wxyz"
-9        };
-10
-11        backtrack(result, map, digits, 0, new StringBuilder());
-12        return result;
-13    }
-14
-15    private void backtrack(List<String> result, String[] map, String digits, int index, StringBuilder sb) {
-16        if (index == digits.length()) {
-17            result.add(sb.toString());
-18            return;
-19        }
-20
-21        String letters = map[digits.charAt(index) - '0'];
-22
-23        for (char c : letters.toCharArray()) {
-24            sb.append(c);
-25            backtrack(result, map, digits, index + 1, sb);
-26            sb.deleteCharAt(sb.length() - 1);
-27        }
-28    }
-29}
+6        ListNode fast = dummy;
+7        ListNode slow = dummy;
+8
+9        for (int i = 0; i <= n; i++) {
+10            fast = fast.next;
+11        }
+12
+13        while (fast != null) {
+14            fast = fast.next;
+15            slow = slow.next;
+16        }
+17
+18        slow.next = slow.next.next;
+19
+20        return dummy.next;
+21    }
+22}
